@@ -6,19 +6,29 @@ function App() {
 
   const ops = ['/', '*', '+', '-', '.'];
 
+
   const updateCalc = value => {
     if(
       ops.includes(value) && calc === '' ||
       ops.includes(value) && ops.includes(calc.slice(-1))
-    )
-
+    ) 
+     {
+      return
+    }
     setCalc(calc + value)
+
+    if(!ops.includes(value)){
+      setResult(eval(calc + value).toString())
+    }
+
   }
 
+  
+  
   const createDigits = () => {
     const digits = [];
 
-    {/* Loop through numbers starting from 1 to 10 and push 
+  {/* Loop through numbers starting from 1 to 10 and push 
   them as buttons in the digits array*/}
     for (let i = 1; i < 10; i++) {
       digits.push(
@@ -32,11 +42,28 @@ function App() {
   }
 
 
+  //=
+  const calculate = () => {
+    setCalc(eval(calc).toString())
+  }
+
+
+  //delete
+  const deleteLast = () => {
+    if(calc == '') {
+      return;
+    } 
+
+    const value = calc.slice(0, -1)
+    setCalc(value)
+  }
+
+
   return (
     <div className="App">
       <div className="calculator">
         <div className="display">
-          {result ? <span>(0)</span> : 0}
+          {result ? <span>({result})</span> : ''}&nbsp;
           {calc || 0}
         </div>
 
@@ -47,7 +74,7 @@ function App() {
           <button onClick={() => updateCalc('+')}>+</button>
           <button onClick={() => updateCalc('-')}>-</button>
 
-          <button>Del</button>
+          <button onClick={deleteLast}>Del</button>
         </div>
 
         {/* Digits */}
@@ -56,7 +83,7 @@ function App() {
           <button onClick={() => updateCalc('0')}>0</button>
           <button onClick={() => updateCalc('.')}>.</button>
 
-          <button>=</button>
+          <button onClick={calculate}>=</button>
 
         </div>
 
