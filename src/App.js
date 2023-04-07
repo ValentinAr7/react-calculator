@@ -8,27 +8,29 @@ function App() {
 
 
   const updateCalc = value => {
-    if(
+
+    {/* If there is no number input user cannot input operator
+   If last input is operator user cannot input another operator */}
+    if (
       ops.includes(value) && calc === '' ||
       ops.includes(value) && ops.includes(calc.slice(-1))
-    ) 
-     {
+    ) {
       return
     }
     setCalc(calc + value)
 
-    if(!ops.includes(value)){
+    if (!ops.includes(value)) {
       setResult(eval(calc + value).toString())
     }
 
   }
 
-  
-  
+
+
   const createDigits = () => {
     const digits = [];
 
-  {/* Loop through numbers starting from 1 to 10 and push 
+    {/* Loop through numbers starting from 1 to 10 and push 
   them as buttons in the digits array*/}
     for (let i = 1; i < 10; i++) {
       digits.push(
@@ -50,9 +52,9 @@ function App() {
 
   //delete
   const deleteLast = () => {
-    if(calc == '') {
+    if (calc == '') {
       return;
-    } 
+    }
 
     const value = calc.slice(0, -1)
     setCalc(value)
