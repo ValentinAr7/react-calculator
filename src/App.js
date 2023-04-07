@@ -22,10 +22,7 @@ function App() {
     if (!ops.includes(value)) {
       setResult(eval(calc + value).toString())
     }
-
   }
-
-
 
   const createDigits = () => {
     const digits = [];
@@ -44,18 +41,17 @@ function App() {
   }
 
 
-  //=
+  //Display the final calculation
   const calculate = () => {
     setCalc(eval(calc).toString())
   }
 
 
-  //delete
   const deleteLast = () => {
     if (calc == '') {
       return;
     }
-
+    //Delete last input
     const value = calc.slice(0, -1)
     setCalc(value)
   }
